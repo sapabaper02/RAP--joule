@@ -1,0 +1,156 @@
+@Metadata.layer: #CORE
+@UI.headerInfo.title.type: #STANDARD
+@UI.headerInfo.title.value: 'PurchaseOrderID'
+@UI.headerInfo.description.type: #STANDARD
+@UI.headerInfo.description.value: 'PurchaseOrderID'
+annotate view ZC_PURCHASEORDER001 with
+{
+  @UI.hidden: true
+  @EndUserText.label: 'UUID'
+  @UI.identification: [ {
+    position: 10 , 
+    label: 'UUID'
+  } ]
+  @UI.lineItem: [ {
+    position: 10 , 
+    label: 'UUID'
+  } ]
+  @UI.selectionField: [ {
+    position: 10 
+  } ]
+  UUID;
+  
+  @EndUserText.label: 'PurchaseOrderID'
+  @UI.facet: [ {
+    label: 'General Information', 
+    id: 'GeneralInfo', 
+    purpose: #STANDARD, 
+    position: 20 , 
+    type: #IDENTIFICATION_REFERENCE
+  }, 
+  {
+    label: 'OrderItem Items', 
+    id: 'OrderItemItems', 
+    purpose: #STANDARD, 
+    position: 21 , 
+    type: #LINEITEM_REFERENCE, 
+    targetElement: '_OrderItem'
+  }, 
+  {
+    label: 'Delivery Items', 
+    id: 'DeliveryItems', 
+    purpose: #STANDARD, 
+    position: 22 , 
+    type: #LINEITEM_REFERENCE, 
+    targetElement: '_Delivery'
+  } ]
+  @UI.identification: [ {
+    position: 20 , 
+    label: 'PurchaseOrderID'
+  } ]
+  @UI.lineItem: [ {
+    position: 20 , 
+    label: 'PurchaseOrderID'
+  } ]
+  @UI.selectionField: [ {
+    position: 20 
+  } ]
+  PurchaseOrderID;
+  
+  @EndUserText.label: 'OrderDate'
+  @UI.identification: [ {
+    position: 30 , 
+    label: 'OrderDate'
+  } ]
+  @UI.lineItem: [ {
+    position: 30 , 
+    label: 'OrderDate'
+  } ]
+  @UI.selectionField: [ {
+    position: 30 
+  } ]
+  OrderDate;
+  
+  @EndUserText.label: 'SupplierName'
+  @UI.identification: [ {
+    position: 40 , 
+    label: 'SupplierName'
+  } ]
+  @UI.lineItem: [ {
+    position: 40 , 
+    label: 'SupplierName'
+  } ]
+  @UI.selectionField: [ {
+    position: 40 
+  } ]
+  SupplierName;
+  
+  @UI.identification: [ {
+    position: 50 
+  } ]
+  @UI.lineItem: [ {
+    position: 50 
+  } ]
+  @UI.selectionField: [ {
+    position: 50 
+  } ]
+  LocalCreatedBy;
+  
+  @UI.identification: [ {
+    position: 60 
+  } ]
+  @UI.lineItem: [ {
+    position: 60 
+  } ]
+  @UI.selectionField: [ {
+    position: 60 
+  } ]
+  LocalCreatedAt;
+  
+  @UI.identification: [ {
+    position: 70 
+  } ]
+  @UI.lineItem: [ {
+    position: 70 
+  } ]
+  @UI.selectionField: [ {
+    position: 70 
+  } ]
+  LocalLastChangedBy;
+  
+  @UI.identification: [ {
+    position: 80 
+  } ]
+  @UI.lineItem: [ {
+    position: 80 
+  } ]
+  @UI.selectionField: [ {
+    position: 80 
+  } ]
+  LocalLastChangedAt;
+  
+  @UI.identification: [ {
+    position: 90 
+  } ]
+  @UI.lineItem: [ {
+    position: 90 
+  } ]
+  @UI.selectionField: [ {
+    position: 90 
+  } ]
+  LastChangedAt;
+  
+  @EndUserText.label: '_BaseEntity'
+  @UI.identification: [ {
+    position: 120 , 
+    label: '_BaseEntity'
+  } ]
+  @UI.lineItem: [ {
+    position: 120 , 
+    label: '_BaseEntity'
+  } ]
+  @UI.selectionField: [ {
+    position: 120 
+  } ]
+  _BaseEntity;
+}

@@ -1,0 +1,45 @@
+projection implementation in class ZBP_C_PURCHASEORDER unique;
+strict ( 2 );
+extensible;
+use draft;
+use side effects;
+define behavior for ZC_PURCHASEORDER001 alias PurchaseOrder
+extensible
+use etag
+{
+  use create;
+  use update;
+  use delete;
+
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
+
+  use association _OrderItem { create; with draft; }
+  use association _Delivery { create; with draft; }
+
+}
+
+define behavior for ZC_ORDERITEM alias OrderItem
+extensible
+use etag
+{
+  use update;
+  use delete;
+
+  use association _PurchaseOrder { with draft; }
+
+}
+
+define behavior for ZC_DELIVERY alias Delivery
+extensible
+use etag
+{
+  use update;
+  use delete;
+
+  use association _PurchaseOrder { with draft; }
+
+}

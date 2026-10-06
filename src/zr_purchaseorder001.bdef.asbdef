@@ -1,0 +1,118 @@
+managed implementation in class ZBP_R_PURCHASEORDER unique;
+strict ( 2 );
+with draft;
+extensible;
+define behavior for ZR_PURCHASEORDER001 alias PurchaseOrder
+persistent table ZPRCHASEORDER001
+extensible
+draft table ZPRCHASEORDER_D
+etag master LocalLastChangedAt
+lock master total etag LastChangedAt
+authorization master( global )
+{
+  field ( readonly )
+   UUID,
+   LocalCreatedBy,
+   LocalCreatedAt,
+   LocalLastChangedBy,
+   LocalLastChangedAt,
+   LastChangedAt;
+
+  field ( numbering : managed )
+   UUID;
+
+
+  create;
+  update;
+  delete;
+
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Edit;
+  draft action Resume;
+  draft determine action Prepare;
+
+  mapping for ZPRCHASEORDER001 corresponding extensible
+  {
+    UUID = uuid;
+    PurchaseOrderID = purchase_order_id;
+    OrderDate = order_date;
+    SupplierName = supplier_name;
+    LocalCreatedBy = local_created_by;
+    LocalCreatedAt = local_created_at;
+    LocalLastChangedBy = local_last_changed_by;
+    LocalLastChangedAt = local_last_changed_at;
+    LastChangedAt = last_changed_at;
+  }
+
+  association _OrderItem { create; with draft; }
+  association _Delivery { create; with draft; }
+
+}
+
+define behavior for ZR_ORDERITEM alias OrderItem
+persistent table ZORDERITEM
+extensible
+draft table ZORDERITEM_D
+etag dependent by _PurchaseOrder
+lock dependent by _PurchaseOrder
+authorization dependent by _PurchaseOrder
+{
+  field ( readonly )
+   UUID,
+   ParentUUID;
+
+  field ( numbering : managed )
+   UUID;
+
+
+  update;
+  delete;
+
+  mapping for ZORDERITEM corresponding extensible
+  {
+    UUID = uuid;
+    ParentUUID = parent_uuid;
+    OrderItemID = order_item_id;
+    ProductName = product_name;
+    Quantity = quantity;
+    UnitPrice = unit_price;
+    CurrencyCode = currency_code;
+    QuantityUOM = quantity_uom;
+  }
+
+  association _PurchaseOrder { with draft; }
+
+}
+
+define behavior for ZR_DELIVERY alias Delivery
+persistent table ZDELIVERY
+extensible
+draft table ZDELIVERY_D
+etag dependent by _PurchaseOrder
+lock dependent by _PurchaseOrder
+authorization dependent by _PurchaseOrder
+{
+  field ( readonly )
+   UUID,
+   ParentUUID;
+
+  field ( numbering : managed )
+   UUID;
+
+
+  update;
+  delete;
+
+  mapping for ZDELIVERY corresponding extensible
+  {
+    UUID = uuid;
+    ParentUUID = parent_uuid;
+    DeliveryID = delivery_id;
+    DeliveryDate = delivery_date;
+    DeliveryStatus = delivery_status;
+  }
+
+  association _PurchaseOrder { with draft; }
+
+}
